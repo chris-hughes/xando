@@ -17,16 +17,22 @@ body {
 .container {
 	height: 500px;
 	width: 500px;
-	background-color: red;
+	padding: 10px;
+	background-color: lightgrey;
 	margin: 0 auto;
 }
 
 .gameSquare {
 	height: 30%;
 	width: 30%;
-	background-color: green;
+	/*background-color: green;*/
 	float: left;
 	border-radius: 10px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 150px;
+	font-size: 6em;
+	font-style: ;
 }
 
 .wallV {
