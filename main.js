@@ -14,7 +14,7 @@ $(document).ready(function(){
 				g.move(g.turn,$(this).index()/2);
 			}
 			if (g.winner() != null){
-				console.log("winner");
+				$('h1').text(g.winner()+'  Wins!');
 			}
 		}
 	});
