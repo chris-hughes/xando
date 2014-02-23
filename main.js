@@ -24,7 +24,21 @@ $(document).ready(function(){
 		opponent = e.options[e.selectedIndex].value;
 	});
 
-	$('.gameSquare').on('click', function(){
+	$('#restart').on('click',function(){
+		for (i=0;i<9;i++){
+			board[i] = 0;
+		};
+		turn = "X";
+		move_number = 1;
+		history = [];
+		$('h1').text('Tic-Tac-Toe');
+		$('.gameSquare').text('');
+		$('.gameSquare').on('click', play)
+	});
+
+	$('.gameSquare').on('click', play);
+
+	function play(){
 		var cell = $(this).index()/2;
 
 		if (g.is_empty(board,cell)){
@@ -72,7 +86,7 @@ $(document).ready(function(){
 				$('h1').text("It's a draw!");
 			}
 		}
-	});
 
+	};
 
 });
