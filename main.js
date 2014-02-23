@@ -23,6 +23,13 @@ $(document).ready(function(){
 	$('#opponent').change(function(){
 		e = document.getElementById("opponent");
 		opponent = e.options[e.selectedIndex].value;
+		if (opponent=='Random'){
+			$('#firstMove').append('<option value="Computer">Computer</option>');
+		}
+		else {
+			$('#firstMove option')[1].remove();
+			$('#firstMove').change();
+		}
 	});
 
 	var f = document.getElementById("firstMove");
@@ -31,8 +38,9 @@ $(document).ready(function(){
 	$('#firstMove').change(function(){
 		f = document.getElementById("firstMove");
 		first = f.options[f.selectedIndex].value;
-	});	
+	});
 
+	// restart the game
 	$('#restart').on('click',function(){
 		for (i=0;i<9;i++){
 			board[i] = 0;
