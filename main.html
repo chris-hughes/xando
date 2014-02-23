@@ -12,14 +12,34 @@
 			<h1>Tic-Tac-Toe</h1>
 		</div>
 		<div class="options">
-			Opponent: 
-			<select id="opponent">
-				<option value="Human">Human</option>
-				<option value="Random">Random</option>
-				<option value="Bread">Hot Bread</option>
-			</select>
-			<input type="submit" id="restart" value="restart">
+			<div class="optionsRow">
+				<div class="optionsCell">
+					Opponent
+				</div>
+				<div class="optionsCell">
+					<select id="opponent">
+						<option value="Human">Human</option>
+						<option value="Random">Random</option>
+						<option value="Bread">Hot Bread</option>
+					</select>
+				</div>
+			</div>
+			<div class="optionsRow">
+				<div class="optionsCell">
+					First Move
+				</div>
+				<div class="optionsCell">
+					<select id="firstMove">
+						<option value="Human">Human</option>
+						<option value="Computer">Computer</option>
+					</select>
+				</div>
+			</div>
+			<div class="optionsCell">
+				<input type="submit" id="restart" value="Restart Game">
+			</div>
 		</div>
+
 		<div class="container">
 			<div class="gameSquare"></div>
 			<div class="wallV"></div>
@@ -39,6 +59,6 @@
 			<div class="wallV"></div>
 			<div class="gameSquare"></div>
 		</div>
+
 	</body>
 </html>
-

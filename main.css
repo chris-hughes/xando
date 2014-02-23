@@ -1,6 +1,6 @@
 
 body {
-	margin: 50px 100px 100px 100px;
+	margin: 25px 100px 25px 100px;
 	/*margin-left: 70px;*/
 	/*margin-right: 70px;*/
 }
@@ -18,12 +18,28 @@ body {
 	margin-bottom: 10px;
 }
 
+.options {
+	float: left;
+	padding-left: 150px;
+}
+
+.optionsRow {
+	margin-bottom: 10px;
+}
+
+.optionsCell {
+	text-align: center;
+	/*float: right;*/
+	/*width: 25px;*/
+}
+
 .container {
 	height: 500px;
 	width: 500px;
 	padding: 10px;
 	background-color: lightgrey;
 	margin: 0 auto;
+	/*float:left;*/
 }
 
 .gameSquare {

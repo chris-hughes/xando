@@ -16,6 +16,7 @@ $(document).ready(function(){
 				move_number: move_number,
 				history: history };
 
+	// read inputs
 	var e = document.getElementById("opponent");
 	var opponent = e.options[e.selectedIndex].value;
 
@@ -23,6 +24,14 @@ $(document).ready(function(){
 		e = document.getElementById("opponent");
 		opponent = e.options[e.selectedIndex].value;
 	});
+
+	var f = document.getElementById("firstMove");
+	var first = f.options[f.selectedIndex].value;
+
+	$('#firstMove').change(function(){
+		f = document.getElementById("firstMove");
+		first = f.options[f.selectedIndex].value;
+	});	
 
 	$('#restart').on('click',function(){
 		for (i=0;i<9;i++){
