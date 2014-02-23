@@ -1,20 +1,49 @@
 $(document).ready(function(){
 
 	var g = new Game();
-	// console.log(g.state);
+
+	// initial setup
+	board = new Array(9);
+	for (i=0;i<9;i++){
+		board[i] = 0;
+	};
+	turn = "X";
+	move_number = 1;
+	history = [];
+
+	state = {	board: board,	
+				turn:  turn,
+				move_number: move_number,
+				history: history };
+
 
 	$('.gameSquare').on('click', function(){
-		if ($(this).text()==""){
-			if (g.turn=="X"){
+		var cell = $(this).index()/2;
+
+		if (g.is_empty(board,cell)){
+			if (turn=="X"){
 				$(this).text('X');
-				g.move(g.turn,$(this).index()/2);
+				board[cell] = 1;
+				move_number++;
+				history.push(["X",cell]);
+				if (g.winner(board) == true){
+					$('h1').text(turn+'  Wins!');
+					$('.gameSquare').attr('onclick','').unbind('click');
+					return;
+				}
+				turn = "O"
 			}
 			else {
 				$(this).text('O');
-				g.move(g.turn,$(this).index()/2);
-			}
-			if (g.winner() != null){
-				$('h1').text(g.winner()+'  Wins!');
+				board[cell] = -1;
+				move_number++;
+				history.push(["O",cell]);
+				if (g.winner(board) == true){
+					$('h1').text(turn+'  Wins!');
+					$('.gameSquare').attr('onclick','').unbind('click');
+					return;
+				}
+				turn = "X"
 			}
 		}
 	});
