@@ -45,6 +45,9 @@ $(document).ready(function(){
 				}
 				turn = "X"
 			}
+			if (g.full(board)==true){
+				$('h1').text("It's a draw!");
+			}
 		}
 	});
 

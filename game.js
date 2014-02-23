@@ -11,7 +11,7 @@ function Game(){
 	this.empty = function(board){
 		var cells = [];
 		for (i=0;i<9;i++){
-			if (board[i]=0){
+			if (board[i]==0){
 				cells.push(i);
 			}
 		}
@@ -38,11 +38,22 @@ function Game(){
 		}		
 	};
 
+	// is the board full
+	this.full = function(board){
+		empty = this.empty(board);
+		if (empty.length==0 ){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	// random player
 	this.random = function(board){
 		empty = this.empty(board);
 		rand = Math.floor(Math.random()*empty.length);
-		return board[rand];
+		return rand;
 	};
 
 };
