@@ -53,7 +53,7 @@ function Game(){
 	this.random = function(board){
 		empty = this.empty(board);
 		rand = Math.floor(Math.random()*empty.length);
-		return rand;
+		return empty[rand];
 	};
 
 };

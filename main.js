@@ -16,6 +16,13 @@ $(document).ready(function(){
 				move_number: move_number,
 				history: history };
 
+	var e = document.getElementById("opponent");
+	var opponent = e.options[e.selectedIndex].value;
+
+	$('#opponent').change(function(){
+		e = document.getElementById("opponent");
+		opponent = e.options[e.selectedIndex].value;
+	});
 
 	$('.gameSquare').on('click', function(){
 		var cell = $(this).index()/2;
@@ -32,6 +39,22 @@ $(document).ready(function(){
 					return;
 				}
 				turn = "O"
+
+				if (opponent=="Random"){
+					cell = g.random(board)
+					cellSquare = $('.gameSquare')[cell];
+					$(cellSquare).text('O');
+					board[cell] = -1;
+					move_number++;
+					history.push(["O",cell]);
+					if (g.winner(board) == true){
+						$('h1').text(turn+'  Wins!');
+						$('.gameSquare').attr('onclick','').unbind('click');
+						return;
+					}
+					turn = "X"
+				}
+
 			}
 			else {
 				$(this).text('O');
@@ -50,5 +73,6 @@ $(document).ready(function(){
 			}
 		}
 	});
+
 
 });
