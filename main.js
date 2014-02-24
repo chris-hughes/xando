@@ -42,8 +42,10 @@ $(document).ready(function(){
 		first = f.options[f.selectedIndex].value;
 	});
 
-	// restart the game
-	$('#restart').on('click',function(){
+
+	$('#start').on('click',function(){
+
+		// restart the game
 		for (i=0;i<9;i++){
 			board[i] = 0;
 		};
@@ -52,31 +54,43 @@ $(document).ready(function(){
 		history = [];
 		$('h1').text('Tic-Tac-Toe');
 		$('.gameSquare').text('');
-		$('.gameSquare').on('click', play)
-	});
+	
+		// game logic		
+		$('.gameSquare').on('click',function(){
 
-	$('.gameSquare').on('click', play);
+			var cell = $(this).index()/2;
 
-	function play(){
-		var cell = $(this).index()/2;
+			if (g.is_empty(board,cell)){
+				if (turn=="X"){
+					$(this).text('X');
+					board[cell] = 1;
+					move_number++;
+					history.push(["X",cell]);
+					if (g.winner(board) == true){
+						$('h1').text(turn+'  Wins!');
+						$('.gameSquare').attr('onclick','').unbind('click');
+						return;
+					}
+					turn = "O"
 
-		if (g.is_empty(board,cell)){
-			if (turn=="X"){
-				$(this).text('X');
-				board[cell] = 1;
-				move_number++;
-				history.push(["X",cell]);
-				if (g.winner(board) == true){
-					$('h1').text(turn+'  Wins!');
-					$('.gameSquare').attr('onclick','').unbind('click');
-					return;
+					if (opponent=="Random"){
+						cell = g.random(board)
+						cellSquare = $('.gameSquare')[cell];
+						$(cellSquare).text('O');
+						board[cell] = -1;
+						move_number++;
+						history.push(["O",cell]);
+						if (g.winner(board) == true){
+							$('h1').text(turn+'  Wins!');
+							$('.gameSquare').attr('onclick','').unbind('click');
+							return;
+						}
+						turn = "X"
+					}
+
 				}
-				turn = "O"
-
-				if (opponent=="Random"){
-					cell = g.random(board)
-					cellSquare = $('.gameSquare')[cell];
-					$(cellSquare).text('O');
+				else {
+					$(this).text('O');
 					board[cell] = -1;
 					move_number++;
 					history.push(["O",cell]);
@@ -87,25 +101,13 @@ $(document).ready(function(){
 					}
 					turn = "X"
 				}
-
-			}
-			else {
-				$(this).text('O');
-				board[cell] = -1;
-				move_number++;
-				history.push(["O",cell]);
-				if (g.winner(board) == true){
-					$('h1').text(turn+'  Wins!');
-					$('.gameSquare').attr('onclick','').unbind('click');
-					return;
+				if (g.full(board)==true){
+					$('h1').text("It's a draw!");
 				}
-				turn = "X"
 			}
-			if (g.full(board)==true){
-				$('h1').text("It's a draw!");
-			}
-		}
 
-	};
+		});
+
+	});
 
 });
