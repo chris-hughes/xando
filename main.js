@@ -54,9 +54,20 @@ $(document).ready(function(){
 		history = [];
 		$('h1').text('Tic-Tac-Toe');
 		$('.gameSquare').text('');
-	
-		// game logic		
+
+		// if computer plays first
+		if (opponent=='Random' && first=="Computer"){
+			cell = g.random(board)
+			cellSquare = $('.gameSquare')[cell];
+			$(cellSquare).text('O');
+			board[cell] = -1;
+			move_number++;
+			history.push(["O",cell]);
+			turn="X";
+		}
+
 		$('.gameSquare').on('click',function(){
+
 
 			var cell = $(this).index()/2;
 
