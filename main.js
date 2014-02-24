@@ -23,8 +23,10 @@ $(document).ready(function(){
 	$('#opponent').change(function(){
 		e = document.getElementById("opponent");
 		opponent = e.options[e.selectedIndex].value;
-		if (opponent=='Random'){
-			$('#firstMove').append('<option value="Computer">Computer</option>');
+		if (opponent=='Random' || opponent=='Bread'){
+			if (!$('#firstMove option')[1]){
+				$('#firstMove').append('<option value="Computer">Computer</option>');
+			}
 		}
 		else {
 			$('#firstMove option')[1].remove();
