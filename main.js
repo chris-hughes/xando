@@ -52,8 +52,9 @@ $(document).ready(function(){
 		turn = "X";
 		move_number = 1;
 		history = [];
-		$('h1').text('Tic-Tac-Toe');
+		$('h1').text('Play!');
 		$('.gameSquare').text('');
+
 
 		// if computer plays first
 		if (opponent=='Random' && first=="Computer"){
@@ -66,8 +67,8 @@ $(document).ready(function(){
 			turn="X";
 		}
 
+		// main game logic
 		$('.gameSquare').on('click',function(){
-
 
 			var cell = $(this).index()/2;
 
@@ -103,6 +104,8 @@ $(document).ready(function(){
 				else {
 					$(this).text('O');
 					board[cell] = -1;
+					console.log(board);
+					g.heuristicScore(board);
 					move_number++;
 					history.push(["O",cell]);
 					if (g.winner(board) == true){
