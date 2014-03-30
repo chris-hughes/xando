@@ -68,28 +68,6 @@ function expand(state, play){
 }
 
 
-function minimise(array, fn){
-	var min,
-		min_value = Infinity;
-
-	array
-	.forEach(function(item){
-		var score = fn(item);
-		if(score < min_value){
-			min_value = score;
-			min = item;
-		}
-	})
-
-	return min;
-}
-
-function maximise(array, fn){
-	return minimise(array, function(item){
-		return fn(item) * -1
-	})
-}
-
 function create_tree(state, depth, move){
 	if(depth < 1) return minimax_evaluate(state);
 	return expand(state, move).map(function(s){
@@ -144,52 +122,7 @@ function collapse_tree(tree, max, returns_value){
 
 
 
-	// if(max){
-	// 	console.log("maximise", tree, tree.map(function(t){
-	// 		return collapse_tree(t, !max)
-	// 	}))
-	// 	console.log("---> ", maximise(tree, function(t){
-	// 		return collapse_tree(t, !max)
-	// 	}))
-	// 	return maximise(tree, function(t){
-	// 		return collapse_tree(t, !max)
-	// 	});
-	// } else {
-	// 	console.log("minimise", tree)
-	// 	return minimise(tree, function(t){
-	// 		return collapse_tree(t, !max)
-	// 	});
-	// }
-
-
-	// if(max){
-	// 	return maximise(collapse_tree(tree, !max), function(i){return i})
-	// } else {
-	// 	return minimise(collapse_tree(tree, !max), function(i){return i})
-	// }
-
-
-	/*
-	if(tree instanceof Array){
-		if(max){
-			return maximise(collapse_tree(tree, !max), function(i){return i})
-		} else {
-			return minimise(collapse_tree(tree, !max), function(i){return i})
-		}	
-	} else {
-		console.log("asdf", tree)
-		return tree;
-	}
-	*/
-
 }
-
-// function score_tree(tree, depth){
-
-
-// }
-
-
 
 function minimax(state, player, depth){
 
@@ -199,43 +132,6 @@ function minimax(state, player, depth){
 
 	return expand(state, player == 'X' ? 1 : -1)[idx];
 
-
-
-
-/*
-	if(player === 'X'){
-
-		return maximise(expand(state,1), minimax_evaluate)
-
-	} else if(player === 'O'){
-
-		return minimise(expand(state,-1), minimax_evaluate)
-
-	} else {
-		throw "no player"
-	}
-*/
-
-
-	// if(depth<1) return state;
-
-	// var max,
-	// 	max_value = -Infinity;
-
-	// expand(state,1)
-	// .forEach(function(item){
-	// 	var score = minimax_evaluate(item, player);
-	// 	if(score > max_value){
-	// 		max_value = score;
-	// 		max = item;
-	// 	}
-	// 	console.log(item, "->", minimax_evaluate(item, player));
-	// })
-
-	// return max;
 }
 
 
-
-
-// minimax(board, 'X', 2)
