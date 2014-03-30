@@ -56,4 +56,15 @@ function Game(){
 		return empty[rand];
 	};
 
+	this.hotbread = function(board){
+		console.log("HOT BREAD");
+		var target = minimax(board, -1, 2);
+		for (var i = 0; i < board.length; i++) {
+			if(target[i] !== board[i]){
+				console.log("HEAD BREAD MOVES:", i)
+				return i;
+			}
+		}
+	};
+
 };

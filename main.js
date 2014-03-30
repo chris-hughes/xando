@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	var g = new Game();
 
 	// initial setup
@@ -86,6 +85,21 @@ $(document).ready(function(){
 
 					if (opponent=="Random"){
 						cell = g.random(board)
+						cellSquare = $('.gameSquare')[cell];
+						$(cellSquare).text('O');
+						board[cell] = -1;
+						move_number++;
+						history.push(["O",cell]);
+						if (g.winner(board) == true){
+							$('h1').text(turn+'  Wins!');
+							$('.gameSquare').attr('onclick','').unbind('click');
+							return;
+						}
+						turn = "X"
+					}
+
+					if (opponent=="Bread"){
+						cell = g.hotbread(board)
 						cellSquare = $('.gameSquare')[cell];
 						$(cellSquare).text('O');
 						board[cell] = -1;
