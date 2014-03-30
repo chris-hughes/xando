@@ -58,9 +58,56 @@ function Game(){
 
 	// minimax player
 	this.minimax = function(board,player,depth){
-		if (this.winner(board)==true || depth==0){
-			return this.heuristicScore(board);
+		console.log(this);
+		var boardCopy = board;	
+      	// Generate possible next moves
+      	nextMoves = this.empty(boardCopy);
+ 
+		var bestScore;
+		if (player=="Computer"){
+			bestScore=-99999;
 		}
+		else {
+			bestScore=99999;
+		}
+		var currentScore;
+		var bestMove;
+ 
+ 	    if (nextMoves.length==0 || boardCopy.winner==true || depth == 0) {
+         	// Gameover or depth reached, evaluate score
+         	bestScore = this.heuristicScore(boardCopy);
+      	}
+      	else {
+	        for (i=0;i<nextMoves.length;i++) {
+	            // Try this move for the current "player"
+	            if (player=="Computer"){
+	            	boardCopy[nextMoves[i]]=-1;
+	            }
+	            else {
+	            	boardCopy[nextMoves[i]]=1;
+	            }
+	            console.log(boardCopy);
+	            if (player == "Computer") {  // mySeed (computer) is maximizing player
+					currentScore = this.minimax(boardCopy,"Human",depth - 1)[0];
+					if (currentScore > bestScore) {
+						bestScore = currentScore;
+						bestMove = nextMoves[i];
+					}
+	            }
+	            else {  // oppSeed is minimizing player
+	               	currentScore = this.minimax(boardCopy,"Computer",depth - 1)[0];
+	               	if (currentScore < bestScore) {
+	                	bestScore = currentScore;
+	                  	bestMove = nextMoves[i];
+	               	}
+	            }
+	            // Undo move
+	            boardCopy[i]=0;
+	        }
+        }
+
+        return [bestScore, bestMove];
+
 	};
 
    	// The heuristic evaluation function for the current board
@@ -77,15 +124,7 @@ function Game(){
 		v3 = this.heuristicLine(board,2,5,8);
 		d1 = this.heuristicLine(board,0,4,8);
 		d2 = this.heuristicLine(board,2,4,6);
-		console.log('h1: '+h1);
-		console.log('h2: '+h2);
-		console.log('h3: '+h3);
-		console.log('v1: '+v1);
-		console.log('v2: '+v2);
-		console.log('v3: '+v3);
-		console.log('d1: '+d1);
-		console.log('d2: '+d2);
-		console.log(h1+h2+h3+v1+v2+v3+d1+d2);
+
 		return h1+h2+h3+v1+v2+v3+d1+d2;
 	};
 

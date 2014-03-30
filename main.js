@@ -44,6 +44,8 @@ $(document).ready(function(){
 
 
 	$('#start').on('click',function(){
+		// console.log(opponent);
+		// console.log(first);
 
 		// restart the game
 		for (i=0;i<9;i++){
@@ -57,8 +59,13 @@ $(document).ready(function(){
 
 
 		// if computer plays first
-		if (opponent=='Random' && first=="Computer"){
-			cell = g.random(board)
+		if (opponent!='Human' && first=="Computer"){
+			if (opponent="Random"){
+				cell = g.random(board)
+			}
+			else {
+				cell = g.minimax(board,"Computer",2);
+			}
 			cellSquare = $('.gameSquare')[cell];
 			$(cellSquare).text('O');
 			board[cell] = -1;
@@ -85,8 +92,18 @@ $(document).ready(function(){
 					}
 					turn = "O"
 
-					if (opponent=="Random"){
-						cell = g.random(board)
+					if (opponent!="Human"){
+						if (opponent=="Random"){
+							cell = g.random(board)
+							console.log(board);
+						}
+						else {
+							console.log('global board pre: '+board);
+							cell = minimax(board,"Computer",2)[0];
+							console.log(cell);
+							console.log('global board post: '+board);
+						}	
+							
 						cellSquare = $('.gameSquare')[cell];
 						$(cellSquare).text('O');
 						board[cell] = -1;
@@ -98,14 +115,13 @@ $(document).ready(function(){
 							return;
 						}
 						turn = "X"
+					console.log('global board: '+board);
 					}
 
 				}
 				else {
 					$(this).text('O');
 					board[cell] = -1;
-					console.log(board);
-					g.heuristicScore(board);
 					move_number++;
 					history.push(["O",cell]);
 					if (g.winner(board) == true){
