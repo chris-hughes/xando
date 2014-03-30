@@ -74,12 +74,25 @@ describe("minimax", function(){
 
 	})
 
+	describe('collapse', function(){
+		it('works on level 1', function(){
+			collapse_tree([23,45,12],true, true).should.eql(45)
+		})
+		it('works on level 2', function(){
+			collapse_tree([[1,2,3],[4,5,6]],true, true).should.eql(4)
+		})
+		it('works on level 3', function(){
+			collapse_tree([[[1,2],[3,4]],[[5,6],[7,8]]],true,true).should.eql(6)
+		})
+
+		it('returns index', function(){
+			collapse_tree([[[1,2],[3,4]],[[5,6],[7,8]]],true).should.eql(1)
+		})
+	})
+
 	describe('search', function(){
-		var board = [
-			1,0,0,
-			0,1,0,
-			0,0,0,
-		]
+
+
 
 		it('chooses the bottom right for depth 1 and X', function(){
 			minimax([
@@ -105,6 +118,32 @@ describe("minimax", function(){
 				0,1,0,
 				0,0,-1,
 			])
+		})
+
+		it('chooses the bottom right for depth 1 and X', function(){
+
+			minimax([
+				1,0,0,
+				0,1,0,
+				0,0,0,
+			], 'X', 2)
+			.should.eql([
+				1,0,0,
+				0,1,0,
+				0,0,1,
+			])
+
+
+			// minimax([
+			// 	0,0,0,
+			// 	0,0,-1,
+			// 	1,0,0,
+			// ], 'X', 2)
+			// .should.eql([
+			// 	1,0,0,
+			// 	0,0,-1,
+			// 	1,0,0,
+			// ])
 		})
 
 	})
