@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	var g = new Game();
 
 	// initial setup
@@ -64,7 +63,8 @@ $(document).ready(function(){
 				cell = g.random(board)
 			}
 			else {
-				cell = g.minimax(board,"Computer",2);
+				cell = g.random(board); // update this
+
 			}
 			cellSquare = $('.gameSquare')[cell];
 			$(cellSquare).text('O');
@@ -92,18 +92,8 @@ $(document).ready(function(){
 					}
 					turn = "O"
 
-					if (opponent!="Human"){
-						if (opponent=="Random"){
-							cell = g.random(board)
-							console.log(board);
-						}
-						else {
-							console.log('global board pre: '+board);
-							cell = minimax(board,"Computer",2)[0];
-							console.log(cell);
-							console.log('global board post: '+board);
-						}	
-							
+					if (opponent=="Random"){
+						cell = g.random(board)
 						cellSquare = $('.gameSquare')[cell];
 						$(cellSquare).text('O');
 						board[cell] = -1;
@@ -115,7 +105,21 @@ $(document).ready(function(){
 							return;
 						}
 						turn = "X"
-					console.log('global board: '+board);
+					}
+
+					if (opponent=="Bread"){
+						cell = g.hotbread(board)
+						cellSquare = $('.gameSquare')[cell];
+						$(cellSquare).text('O');
+						board[cell] = -1;
+						move_number++;
+						history.push(["O",cell]);
+						if (g.winner(board) == true){
+							$('h1').text(turn+'  Wins!');
+							$('.gameSquare').attr('onclick','').unbind('click');
+							return;
+						}
+						turn = "X"
 					}
 
 				}
